@@ -1,0 +1,68 @@
+
+.html {
+    min-height: 100vh;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 2fr 10fr 0.5fr;
+}
+
+/* Header Section */
+.header {
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Section */
+.main {
+    padding-top: 25px;
+    background-color: grey;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+
+.board {
+    margin-top: 0;
+    width: 450px;
+    height: 450px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+    border: solid thick black;
+    border-collapse: collapse;
+}
+
+.block {
+    width: 150px;
+    height: 150px;
+    background-color: blue;
+    box-shadow:0px 0px 0px 1px black inset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.marking {
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+}
+
+#restartBtn {
+    width: 200px;
+    height: 50px;
+    margin-top: 50px;
+}
+
+/* Footer Section */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
