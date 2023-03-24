@@ -46,13 +46,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.marking {
-    margin: 0;
-    padding: 0;
     font-size: 50px;
 }
+
 
 #restartBtn {
     width: 200px;

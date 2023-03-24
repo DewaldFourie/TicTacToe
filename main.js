@@ -1,4 +1,8 @@
 
+// Const global
+const blocks = document.querySelectorAll('.block');
+const turnDisplay = document.querySelector('.user-info');
+
 // Geme Board Module IFFE 
 const gameBoard = (() => {
     let board = new Array(9).fill(null);
@@ -26,37 +30,41 @@ const gameBoard = (() => {
     }
 })();
 
-let currentPlayer = "X"
-function playerMove(block, marking) {
-    block.addEventListener('click', () => {
-        marking.textContent = currentPlayer;
-        currentPlayer = currentPlayer === "X" ? "O" : "X";
-    }) 
+
+const playerDesign = (name, marking) => {
+    return {name, marking}
 }
 
+// Create two players with playerDesign Factory Function and set default to player 1
+const playerOne = playerDesign('Player 1', 'O');
+const playerTwo = playerDesign('Player 2', 'X');
+let currentPlayer = playerOne;
 
 
-// Function to dislay the grid 
-function dislayGrid() {
-    let grid = document.querySelector(".board")
+// get each block in the display and add an event listener that points to the blockClicked Function
+const displayBoard = () => {
+    blocks.forEach((block) => {
+        block.addEventListener('click', blockClicked);
+    })
+}
 
-    for (i = 0; i < gameBoard.getBoard().length; i++){
-        let block = document.createElement('div');
-        block.classList.add('block');
-
-
-        let marking = document.createElement('p');
-        marking.classList.add('marking');
-        playerMove(block, marking);
-          
-
-
-        block.appendChild(marking);
-        grid.appendChild(block);
+// the function that handles what happens when the user clicks a block 
+const blockClicked = (e) => {
+    const id = e.target.id;
+    if ( gameBoard.getBoard()[id] === null){
+        gameBoard.makeMove(currentPlayer['marking'], id)
+        e.target.textContent = currentPlayer['marking']
+        currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
+        turnDisplay.textContent = currentPlayer['name']+ "'s Turn";
     }
-
+    else {
+        turnDisplay.textContent = "Oops, can't put there"
+    }
+    console.log(gameBoard.getBoard())
+    console.log(gameBoard.getBoard()[id])
+    
 }
 
 
-dislayGrid();
+displayBoard();
 console.log(gameBoard.getBoard())
