@@ -9,20 +9,32 @@ body {
     width: 100vw;
     display: grid;
     grid-template-rows: 2fr 10fr 0.5fr;
+    font-family: 'Righteous', cursive;
 }
+
+
 
 /* Header Section */
 .header {
-    background-color: aqua;
+    background-color: #004647;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.heading {
+    color: snow;
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
+}
+
+
+
 /* Main Section */
 .main {
     padding-top: 25px;
-    background-color: grey;
+    background-color: #d8ffff;
     display: flex; 
     flex-direction: column;
     align-items: center;
@@ -34,31 +46,65 @@ body {
     height: 450px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
-    border: solid thick black;
+    border: solid thick #004647;
+    border-radius: 5px;
     border-collapse: collapse;
 }
 
 .block {
     width: 150px;
     height: 150px;
-    background-color: blue;
-    box-shadow:0px 0px 0px 1px black inset;
+    background-color: #d8ffff;
+    box-shadow:0px 0px 0px 1px #004647 inset;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    font-size: 70px;
+    color: #004647;
 }
+
+
+.block:hover {
+    background-color: #8ee4e4;
+    cursor: grab;
+}
+
+
+.user-info {
+    font-size: 35px;
+    color: #004647;
+    font-weight: 100;
+}
+
 
 
 #restartBtn {
+    font-family: 'Righteous', cursive;
+    font-weight: 100;
     width: 200px;
     height: 50px;
     margin-top: 50px;
+    margin-bottom: 40px;
+    background-color: #004647;
+    font-size: 20px;
+    color: snow;
+    border-radius: 5px;
 }
+
+#restartBtn:hover {
+    background-color: #8ee4e4;
+    color: #004647;
+    border: solid #004647;
+    cursor: grab;
+}
+
+
 
 /* Footer Section */
 .footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #004647;
+    color: snow;
 }

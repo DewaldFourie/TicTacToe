@@ -95,7 +95,9 @@ const checkForWin = (player1, player2) => {
 
     function computeResult(player) {
         turnDisplay.textContent = 'Player ' + player + ' Wins !!!'  
-        blocks.forEach((block) => block.removeEventListener('click', blockClicked))
+        blocks.forEach((block) => {
+            block.removeEventListener('click', blockClicked)
+        })
     }
 
     for (let i = 0; i < winningCombos.length; i++){
@@ -114,6 +116,7 @@ const checkForWin = (player1, player2) => {
     }
 }
 
+// Function to chevk for a draw
 const checkForDraw = (board) => {
         if (board.includes(null)){
             return false
