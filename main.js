@@ -67,10 +67,6 @@ const blockClicked = (e) => {
         console.log("draw")
     }
     checkForWin(playerOne['marking'], playerTwo['marking'])
-    
-
-    console.log(gameBoard.getBoard())
-    console.log(gameBoard.getBoard()[id])
 }
     
 
@@ -82,7 +78,6 @@ const restartClicked = (e) => {
     gameBoard.resetBoard();
     blocks.forEach((block) => block.textContent = '');
     turnDisplay.textContent = currentPlayer['name'] + ' Starts'
-    console.log("game restarted");
 }
 
 // Function to check if player one or player two wins
@@ -103,20 +98,18 @@ const checkForWin = (player1, player2) => {
     for (let i = 0; i < winningCombos.length; i++){
         const [a, b, c] = winningCombos[i]
         if (gameBoard.getBoard()[a] === player1 && gameBoard.getBoard()[b] === player1
-            && gameBoard.getBoard()[c] === player1){
-            console.log(" 1 wins")  
+            && gameBoard.getBoard()[c] === player1){ 
             computeResult(player1);
         }
         else if (gameBoard.getBoard()[a] === player2 && gameBoard.getBoard()[b] === player2
-            && gameBoard.getBoard()[c] === player2){
-            console.log(" 2 wins")    
+            && gameBoard.getBoard()[c] === player2){ 
             computeResult(player2);
         }
 
     }
 }
 
-// Function to chevk for a draw
+// Function to check for a draw
 const checkForDraw = (board) => {
         if (board.includes(null)){
             return false
@@ -128,4 +121,4 @@ const checkForDraw = (board) => {
  
 
 displayBoard();
-console.log(gameBoard.getBoard())
+
