@@ -4,7 +4,7 @@ const blocks = document.querySelectorAll('.block');
 const turnDisplay = document.querySelector('.user-info');
 const restartBtn = document.querySelector('#restartBtn');
 
-// Geme Board Module IFFE 
+// Game Board Module IFFE 
 const gameBoard = (() => {
     let board = new Array(9).fill(null);
 
@@ -32,13 +32,13 @@ const gameBoard = (() => {
 })();
 
 
-const playerDesign = (name, marking) => {
-    return {name, marking}
+const playerDesign = (name, marking, color) => {
+    return {name, marking, color}
 }
 
 // Create two players with playerDesign Factory Function and set default to player 1
-const playerOne = playerDesign('Player O', 'O');
-const playerTwo = playerDesign('Player X', 'X');
+const playerOne = playerDesign('Player O', 'O', 'blue');
+const playerTwo = playerDesign('Player X', 'X', 'red');
 let currentPlayer = playerOne;
 
 
@@ -56,6 +56,7 @@ const blockClicked = (e) => {
     if ( gameBoard.getBoard()[id] === null){
         gameBoard.makeMove(currentPlayer['marking'], id)
         e.target.textContent = currentPlayer['marking']
+        e.target.style.color = currentPlayer['color']
         currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
         turnDisplay.textContent = currentPlayer['name']+ "'s Turn";
     }
@@ -76,7 +77,10 @@ const blockClicked = (e) => {
 const restartClicked = (e) => {
     displayBoard();
     gameBoard.resetBoard();
-    blocks.forEach((block) => block.textContent = '');
+    blocks.forEach((block) => {
+        block.textContent = ''
+        block.style.backgroundColor = ''
+    });
     turnDisplay.textContent = currentPlayer['name'] + ' Starts'
 }
 
@@ -88,22 +92,27 @@ const checkForWin = (player1, player2) => {
         [0, 4, 8], [2, 4, 6]              // Diagonal wins
     ]
 
-    function computeResult(player) {
-        turnDisplay.textContent = 'Player ' + player + ' Wins !!!'  
+    function computeResult(player, comboIndex) {
+        turnDisplay.textContent = 'Player ' + player + ' Wins !!!';
+        const winningCombo = winningCombos[comboIndex];
+        winningCombo.forEach((index) => {
+            blocks[index].style.backgroundColor = 'lightgreen'
+        })  
         blocks.forEach((block) => {
             block.removeEventListener('click', blockClicked)
         })
     }
 
+
     for (let i = 0; i < winningCombos.length; i++){
         const [a, b, c] = winningCombos[i]
         if (gameBoard.getBoard()[a] === player1 && gameBoard.getBoard()[b] === player1
-            && gameBoard.getBoard()[c] === player1){ 
-            computeResult(player1);
+            && gameBoard.getBoard()[c] === player1){    
+            computeResult(player1, i);
         }
         else if (gameBoard.getBoard()[a] === player2 && gameBoard.getBoard()[b] === player2
             && gameBoard.getBoard()[c] === player2){ 
-            computeResult(player2);
+            computeResult(player2, i);
         }
 
     }
@@ -111,14 +120,14 @@ const checkForWin = (player1, player2) => {
 
 // Function to check for a draw
 const checkForDraw = (board) => {
-        if (board.includes(null)){
-            return false
-        }
-        blocks.forEach((block) => block.removeEventListener('click', blockClicked))
-        turnDisplay.textContent = "It's a Draw, Play again!"
-        return true
+    if (board.includes(null)){
+        return false
     }
- 
+    blocks.forEach((block) => block.removeEventListener('click', blockClicked))
+    turnDisplay.textContent = "It's a Draw, Play again!"
+    return true
+}
+
 
 displayBoard();
 
